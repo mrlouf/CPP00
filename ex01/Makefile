@@ -17,6 +17,9 @@ SRC 		:= 	Contact.cpp		\
 				PhoneBook.cpp	\
 				main.cpp
 
+HEADERS		:= 	Contact.hpp		\
+				PhoneBook.hpp
+
 OBJDIR		= .obj
 OBJS		= $(addprefix $(OBJDIR)/, $(SRC:.cpp=.o))
 
@@ -24,11 +27,11 @@ OBJS		= $(addprefix $(OBJDIR)/, $(SRC:.cpp=.o))
 
 all: $(NAME)
 
-$(OBJDIR)/%.o: %.cpp Makefile
+$(OBJDIR)/%.o: %.cpp $(HEADERS) Makefile
 	@mkdir -p $(@D)
-	@$(CC) $(FLAGS) -c $< -o $@
+	@$(CC) $(FLAGS) -I. -c $< -o $@
 
-$(NAME): $(OBJS) $(SRC) Makefile
+$(NAME): $(OBJS) $(SRC) $(HEADERS) Makefile
 	@$(CC) $(FLAGS) $(SRC) -o $(NAME)
 
 clean: 
