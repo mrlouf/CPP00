@@ -15,8 +15,6 @@ RM			= rm -fr
 
 SRC 		:= 	megaphone.cpp
 
-SRCS		= $(addprefix $(SRCDIR)/, $(SRC))
-
 OBJDIR		= .obj
 OBJS		= $(addprefix $(OBJDIR)/, $(SRC:.cpp=.o))
 
@@ -24,12 +22,12 @@ OBJS		= $(addprefix $(OBJDIR)/, $(SRC:.cpp=.o))
 
 all: $(NAME)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.cpp Makefile
+$(OBJDIR)/%.o: %.cpp Makefile
 	@mkdir -p $(@D)
 	@$(CC) $(FLAGS) -c $< -o $@
 
-$(NAME): 
-	@$(CC) $(FLAGS) $(SRCS) -o $(NAME)
+$(NAME): $(OBJS) $(SRC) Makefile
+	@$(CC) $(FLAGS) $(SRC) -o $(NAME)
 
 clean: 
 	@$(RM) $(OBJDIR)
