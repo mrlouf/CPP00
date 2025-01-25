@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:00:06 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/24 17:42:20 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/25 18:17:52 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int PhoneBook::getIndex( void ) {
 	return index;
 };
 
-void PhoneBook::displayContact(int index) {
+void PhoneBook::displayContact( int index ) {
 	
 	std::cout << "Displaying contact " << index << std::endl;
 
@@ -60,3 +60,14 @@ void PhoneBook::displayAll( void ) {
 		return;
 	displayContact(index);
 };
+
+void PhoneBook::addContact(Contact contact) {
+
+	//TODO
+	// Add contact in the slot _index, increment index
+	// If _index is 8, overwrite the last contact
+
+	// If no empty slot is found, overwrite the last contact
+	_contacts[PhoneBook._index] = contact;
+	std::cerr << "36 15 Minitel> PhoneBook was full, last contact overwritten" << std::endl;
+}

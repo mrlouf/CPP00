@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 13:36:42 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/24 17:09:36 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/25 17:10:27 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ std::string getUserInput( void ) {
 
     std::cout << "36 15 Minitel> ";
     std::getline(std::cin, input);
+
+    for (size_t i = 0; i < input.length(); ++i) {
+        input[i] = std::toupper(input[i]);
+    }
 
 	return input;
 }
