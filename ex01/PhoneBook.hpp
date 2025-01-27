@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:00:18 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/25 18:16:31 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/27 10:23:48 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@
 class PhoneBook {
 	private:
 		Contact _contacts[8];
-		int _index = 0;
+		int _index;
 
 	public:
-		void displayAll();
-		void displayContact( int );
+		void displayAll( PhoneBook book );
+		void displayContact( PhoneBook book, int index );
 		int getIndex( void );
-		void addContact(Contact contact);
+		void addContact(PhoneBook book, Contact contact);
+		void setIndex(int index) { _index = index; };
 };
 
 #endif

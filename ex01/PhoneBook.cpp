@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:00:06 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/25 18:17:52 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/27 10:26:19 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,31 +43,35 @@ int PhoneBook::getIndex( void ) {
 	}
 
 	return index;
-};
+}
 
-void PhoneBook::displayContact( int index ) {
+void PhoneBook::displayContact( PhoneBook book, int index ) {
 	
-	std::cout << "Displaying contact " << index << std::endl;
+	std::cout << book._contacts[index]._firstName << std::endl;
 
-};
+}
 
-void PhoneBook::displayAll( void ) {
+void PhoneBook::displayAll( PhoneBook book ) {
 	
-	std::cout << "Displaying all contacts \n";
+	for (int i = 0; i < 8; i++) {
+		displayContact(book, i);
+	}
 
 	int index = getIndex();
 	if (index == -1)
 		return;
-	displayContact(index);
-};
+}
 
-void PhoneBook::addContact(Contact contact) {
+void PhoneBook::addContact(PhoneBook book, Contact contact) {
 
 	//TODO
 	// Add contact in the slot _index, increment index
-	// If _index is 8, overwrite the last contact
+	// If _index is 7, overwrite the last contact
 
-	// If no empty slot is found, overwrite the last contact
-	_contacts[PhoneBook._index] = contact;
-	std::cerr << "36 15 Minitel> PhoneBook was full, last contact overwritten" << std::endl;
+	_contacts[book._index] = contact;
+	if (book._index == 7)
+		std::cerr << "36 15 Minitel> PhoneBook was full, last contact overwritten" << std::endl;
+	else
+		book._index++;
+
 }

@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:02:39 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/25 17:14:06 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/27 10:18:40 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,27 @@ int main( void ) {
 	
     printWelcomeMessage();
 
-	PhoneBook myPhoneBook;
-	Contact myContact;
+	PhoneBook book;
+	Contact contact;
+
+	book.setIndex(0);
 
 	std::string input = getUserInput();
 	
 	while (!input.empty()) {
-		if (input.compare("ADD") == 0)
-			myContact.addContact();
-		else if (input.compare("SEARCH") == 0)
-			myPhoneBook.displayAll();
-		else if (input.compare("EXIT") == 0)
+		if (input.compare("ADD") == 0 || input.compare("add") == 0)
+			book.addContact(book, contact);
+		else if (input.compare("SEARCH") == 0 || input.compare("search") == 0)
+			book.displayAll();
+		else if (input.compare("EXIT") == 0 || input.compare("exit") == 0)
+		{
+			std::cout << "36 15 Minitel> Goodbye!" << std::endl;
 			return (0);
+		}
 		else {
 			std::cerr << "36 15 Minitel> Unknown input: \'" << input << "\'" << std::endl;
+			input = getUserInput();
 		};
-		input = getUserInput();
 	};
 	
 	return (0);
