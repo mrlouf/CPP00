@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:00:06 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/10 11:41:26 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/10 11:58:59 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,11 @@ void printColumn(const std::string& str) {
 
 	std::string output = str;
 	if (output.length() > 10) {
-		output = output.substr(0, 9) + "."; // Truncate to 9 characters and add '.'
+		output = output.substr(0, 9) + ".";
+		std::cout << output;
 	}
-	std::cout << std::setw(10) << std::setfill(' ') << output; // Pads the string with spaces if needed
+	else
+		std::cout << std::setw(10) << std::setfill(' ') << output;
 	
 }
 
