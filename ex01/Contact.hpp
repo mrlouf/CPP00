@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:02:11 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/25 17:54:54 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/10 11:01:11 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,12 @@ class Contact {
 		std::string _darkestSecret;
 		
 	public:
-		Contact createContact();
+		Contact createContact( void );
+		std::string getFirstName( void ) const;
+		std::string getLastName( void ) const;
+		std::string getNickname( void ) const;
+		std::string getPhoneNumber( void ) const;
+		std::string getDarkestSecret( void ) const;
 };
 
 #endif

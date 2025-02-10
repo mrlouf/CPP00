@@ -6,13 +6,52 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:02:00 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/25 17:55:03 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/10 11:02:07 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
-
 #include <iostream>
+
+std::string Contact::getFirstName() const {
+    return _firstName;
+}
+
+std::string Contact::getLastName() const {
+    return _lastName;
+}
+
+std::string Contact::getNickname() const {
+    return _nickname;
+}
+
+std::string Contact::getPhoneNumber() const {
+    return _phoneNumber;
+}
+
+std::string Contact::getDarkestSecret() const {
+    return _darkestSecret;
+}
+
+std::string getFirstName(Contact& contact) {
+    return contact.getFirstName();
+}
+
+std::string getLastName(Contact& contact) {
+    return contact.getLastName();
+}
+
+std::string getNickname(Contact& contact) {
+    return contact.getNickname();
+}
+
+std::string getPhoneNumber(Contact& contact) {
+    return contact.getPhoneNumber();
+}
+
+std::string getDarkestSecret(Contact& contact) {
+    return contact.getDarkestSecret();
+}
 
 Contact Contact::createContact( void ) {
 

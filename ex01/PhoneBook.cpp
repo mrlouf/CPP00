@@ -6,12 +6,16 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:00:06 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/10 08:40:36 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/10 11:41:26 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cstdlib>
 #include "PhoneBook.hpp"
+
+Contact PhoneBook::getContact( PhoneBook& book, int index ) {
+    return book._contacts[index];
+}
 
 void PhoneBook::setIndex(int index) {
     _index = index;
@@ -31,7 +35,7 @@ int PhoneBook::getIndex( void ) {
 
 	if (input.compare("EXIT") == 0 || input.compare("exit") == 0)
 	{
-		exit (0);
+		return (-1);
 	}
 
 	if (input.find_first_not_of("0123456789+-") != std::string::npos) {
@@ -44,8 +48,8 @@ int PhoneBook::getIndex( void ) {
 	ss >> index;
 
 	try	{
-		if ( index < 0 ) {
-      		throw std::invalid_argument( "index is negative" );
+		if ( index <= 0 ) {
+      		throw std::invalid_argument( "index is null or negative" );
 		}
 		else if ( index > 8 ) {
         	throw std::invalid_argument( "index is out of range" );
@@ -59,10 +63,28 @@ int PhoneBook::getIndex( void ) {
 	return index;
 }
 
-void PhoneBook::displayContact( PhoneBook book ) {
-	
-	(void)book;
+void printColumn(const std::string& str) {
 
+	std::string output = str;
+	if (output.length() > 10) {
+		output = output.substr(0, 9) + "."; // Truncate to 9 characters and add '.'
+	}
+	std::cout << std::setw(10) << std::setfill(' ') << output; // Pads the string with spaces if needed
+	
+}
+
+void PhoneBook::displayContact( PhoneBook& book, int index ) {
+
+	index--;
+	Contact contact = book.getContact(book, index);
+
+	std::cout << std::endl;
+	std::cout << "First Name: " << contact.getFirstName() << std::endl;
+	std::cout << "Last Name:  " << contact.getLastName() << std::endl;
+	std::cout << "Nickname:   " << contact.getNickname() << std::endl;
+	std::cout << "Phone:      " << contact.getPhoneNumber() << std::endl;
+	std::cout << "Secret:     " << contact.getDarkestSecret() << std::endl;
+	std::cout << std::endl;
 }
 
 void PhoneBook::displayAll( PhoneBook book ) {
@@ -73,32 +95,44 @@ void PhoneBook::displayAll( PhoneBook book ) {
     std::cout << "|----------|----------|----------|----------|" << std::endl;
 
 	if (book._index == 0) {
-		
+		std::cout << std::endl;
 		std::cout << "Contact list is empty!" << std::endl;
+		std::cout << std::endl;
 		return ;
 	}
 
-	for (int i = 0; i < 8; i++) {
-		;
-	}
+	for (int i = 0; i < book._index; i++) {
+		
+        Contact contact = book._contacts[i];
+        std::cout << "|" << std::setw(10) << std::right << i + 1;
+		std::cout << "|";
+        printColumn(contact.getFirstName());
+        std::cout << "|";
+        printColumn(contact.getLastName());
+        std::cout << "|";
+        printColumn(contact.getNickname());
+        std::cout << "|" << std::endl;
+    }
+	std::cout << std::endl;
 
 	int index = getIndex();
 	if (index == -1)
 		return;
+
+	displayContact(book, index);
 }
 
-void PhoneBook::addContact(PhoneBook book) {
-
-	//TODO
-	// Add contact in the slot _index, increment index
-	// If _index is 7, overwrite the last contact
+void PhoneBook::addContact(PhoneBook& book) {
 
 	Contact contact;
+	contact.createContact();
 
-	_contacts[book._index] = contact;
-	if (book._index == 7)
+	if (book._index >= 8) {
 		std::cerr << "36 15 Minitel> PhoneBook was full, last contact overwritten" << std::endl;
-	else
+		book._contacts[7] = contact;
+	} else {
+		std::cout << "36 15 Minitel> New contact added!" << std::endl;
+		book._contacts[book._index] = contact;
 		book._index++;
-
+	}
 }

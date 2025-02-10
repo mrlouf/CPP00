@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:00:18 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/10 08:26:09 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/10 10:47:43 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <sstream>
 #include <exception>
+#include <iomanip>
 #include "Contact.hpp"
 
 class PhoneBook {
@@ -24,10 +25,11 @@ class PhoneBook {
 
 	public:
 		void displayAll( PhoneBook book );
-		void displayContact( PhoneBook book );
+		void displayContact( PhoneBook& book, int index );
 		int getIndex( void );
-		void addContact( PhoneBook book );
+		void addContact( PhoneBook& book );
 		void setIndex( int index );
+		Contact getContact ( PhoneBook& book, int index );
 };
 
 #endif
