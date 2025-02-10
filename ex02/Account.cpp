@@ -3,11 +3,22 @@
 #include <iomanip>
 #include <ctime>
 
+
+int Account::_nbAccounts = 0;
+
+int Account::_totalAmount = 0;
+
+int Account::_totalNbDeposits = 0;
+
+int Account::_totalNbWithdrawals = 0;
+
 // Default constructor
 Account::Account() {}
 
 // Constructor with one integer argument to initialise _amount
-Account::Account( int initial_deposit ) : _amount(initial_deposit) {}
+Account::Account( int initial_deposit ) : _amount(initial_deposit) {
+
+}
 
 // Destructor
 Account::~Account() {}
@@ -36,20 +47,56 @@ int	getNbWithdrawals( void ) {
 	return getNbWithdrawals();
 }
 
-int Account::getTotalAmount( void ) {
-	return _totalAmount;
-}
-
-int	getTotalAmount( void ) {
-	return getTotalAmount();
-}
-
 int Account::getNbDeposits( void ) {
 	return _totalNbDeposits;
 }
 
 int	getNbDeposits( void ) {
 	return getNbDeposits();
+}
+
+Account::Account(int initial_deposit) : _accountIndex(_nbAccounts++), _amount(initial_deposit), _nbDeposits(0), _nbWithdrawals(0) {
+
+    _totalAmount += initial_deposit;
+
+}
+
+void Account::makeDeposit(int deposit) {
+
+    if (deposit > 0) {
+
+        _amount += deposit;
+
+        _nbDeposits++;
+
+        _totalAmount += deposit;
+
+        _totalNbDeposits++;
+
+    }
+
+}
+
+bool Account::makeWithdrawal(int withdrawal) {
+
+    if (withdrawal > 0 && _amount >= withdrawal) {
+
+        _amount -= withdrawal;
+        _nbWithdrawals++;
+        _totalAmount -= withdrawal;
+        _totalNbWithdrawals++;
+
+        return true;
+    }
+
+    return false;
+	
+}
+
+int Account::checkAmount(void) const {
+
+    return _amount;
+
 }
 
 void Account::_displayTimestamp( void ) {
@@ -68,4 +115,15 @@ void Account::_displayTimestamp( void ) {
 
 void Account::displayAccountsInfos() {
 
+	_displayTimestamp();
+	std::cout << "accounts:" << _nbAccounts << ";";
+	std::cout << "total:" << _totalAmount << ";";
+	std::cout << "deposits:" << _totalAmount << ";";
+	std::cout << "withdrawals:" << _totalAmount << std::endl;
+
+}
+
+void	displayStatus( void ) {
+	_displayTimestamp();
+	std::cout << "index:" << _accountIndex << ";";
 }
