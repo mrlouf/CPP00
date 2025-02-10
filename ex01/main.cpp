@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:02:39 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/27 10:18:40 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/10 08:42:24 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,47 @@
 #include <string>
 #include "Contact.hpp"
 #include "PhoneBook.hpp"
-#include "utils.hpp"
+
+void printWelcomeMessage() {
+
+    std::cout << " +--------------------------------------------------------------------------------------------+" << std::endl;
+    std::cout << "|                                                                                              |" << std::endl;
+    std::cout << "|      WELCOME TO THE (CRAPPY) RETRO PHONEBOOK                                                 |" << std::endl;
+    std::cout << "|                                                                                              |" << std::endl;
+    std::cout << "|   ██████╗  ██████╗      ██╗███████╗    ███╗   ███╗██╗███╗   ██╗██╗████████╗███████╗██╗       |" << std::endl;
+    std::cout << "|   ╚════██╗██╔════╝     ███║██╔════╝    ████╗ ████║██║████╗  ██║██║╚══██╔══╝██╔════╝██║       |" << std::endl;
+    std::cout << "|    █████╔╝███████╗     ╚██║███████╗    ██╔████╔██║██║██╔██╗ ██║██║   ██║   █████╗  ██║       |" << std::endl;
+    std::cout << "|    ╚═══██╗██╔═══██╗     ██║╚════██║    ██║╚██╔╝██║██║██║╚██╗██║██║   ██║   ██╔══╝  ██║       |" << std::endl;
+    std::cout << "|   ██████╔╝╚██████╔╝     ██║███████║    ██║ ╚═╝ ██║██║██║ ╚████║██║   ██║   ███████╗███████╗  |" << std::endl;
+    std::cout << "|   ╚═════╝  ╚═════╝      ╚═╝╚══════╝    ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝   ╚══════╝╚══════╝  |" << std::endl;
+    std::cout << "|                                                                                              |" << std::endl;
+    std::cout << "|      Enter ADD to save a new contact                                                         |" << std::endl;
+    std::cout << "|      Enter SEARCH to display a specific contact                                              |" << std::endl;
+    std::cout << "|      Enter EXIT to quit and lose all contacts forever                                        |" << std::endl;
+    std::cout << "|                                                                                              |" << std::endl;
+    std::cout << " +--------------------------------------------------------------------------------------------+" << std::endl;
+
+}
+
+std::string getUserInput( void ) {
+	
+	std::string input;
+
+    std::cout << "36 15 Minitel> ";
+    std::getline(std::cin, input);
+
+    for (size_t i = 0; i < input.length(); ++i) {
+        input[i] = std::toupper(input[i]);
+    }
+
+	return input;
+}
 
 int main( void ) {
 	
     printWelcomeMessage();
 
 	PhoneBook book;
-	Contact contact;
 
 	book.setIndex(0);
 
@@ -29,9 +62,9 @@ int main( void ) {
 	
 	while (!input.empty()) {
 		if (input.compare("ADD") == 0 || input.compare("add") == 0)
-			book.addContact(book, contact);
+			book.addContact(book);
 		else if (input.compare("SEARCH") == 0 || input.compare("search") == 0)
-			book.displayAll();
+			book.displayAll(book);
 		else if (input.compare("EXIT") == 0 || input.compare("exit") == 0)
 		{
 			std::cout << "36 15 Minitel> Goodbye!" << std::endl;
@@ -39,8 +72,8 @@ int main( void ) {
 		}
 		else {
 			std::cerr << "36 15 Minitel> Unknown input: \'" << input << "\'" << std::endl;
-			input = getUserInput();
 		};
+		input = getUserInput();
 	};
 	
 	return (0);

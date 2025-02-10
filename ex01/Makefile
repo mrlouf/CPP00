@@ -15,12 +15,10 @@ RM			= rm -fr
 
 SRC 		:= 	Contact.cpp		\
 				PhoneBook.cpp	\
-				main.cpp		\
-				utils.cpp
+				main.cpp
 
 HEADERS		:= 	Contact.hpp		\
 				PhoneBook.hpp	\
-				utils.hpp
 
 OBJDIR		= .obj
 OBJS		= $(addprefix $(OBJDIR)/, $(SRC:.cpp=.o))
