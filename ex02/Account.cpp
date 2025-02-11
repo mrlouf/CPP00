@@ -3,13 +3,10 @@
 #include <iomanip>
 #include <ctime>
 
-
+// Global variables for all accounts
 int Account::_nbAccounts = 0;
-
 int Account::_totalAmount = 0;
-
 int Account::_totalNbDeposits = 0;
-
 int Account::_totalNbWithdrawals = 0;
 
 // Default constructor
@@ -18,66 +15,59 @@ Account::Account() {}
 // Constructor with one integer argument to initialise _amount
 Account::Account( int initial_deposit ) : _amount(initial_deposit) {
 
+	// Init object's variables
+	_accountIndex = _nbAccounts++;
+	_amount = initial_deposit;
+	_nbDeposits = 0;
+	_nbWithdrawals = 0;
+
+	// Update global variable
+	_totalAmount += _amount;
+
+	// Print status + "created"
+	_displayTimestamp();
+	std::cout << "index:" << _accountIndex << ";";
+	std::cout << "amount:" << _amount << ";";
+	std::cout << "created" << std::endl;
+
 }
 
 // Destructor
-Account::~Account() {}
+Account::~Account() {
 
-int Account::getNbAccounts( void ) {
-	return _nbAccounts;
-}
-
-int	getNbAccounts( void ) {
-	return getNbAccounts();
-}
-
-int Account::getTotalAmount( void ) {
-	return _totalAmount;
-}
-
-int	getTotalAmount( void ) {
-	return getTotalAmount();
-}
-
-int Account::getNbWithdrawals( void ) {
-	return _totalNbWithdrawals;
-}
-
-int	getNbWithdrawals( void ) {
-	return getNbWithdrawals();
-}
-
-int Account::getNbDeposits( void ) {
-	return _totalNbDeposits;
-}
-
-int	getNbDeposits( void ) {
-	return getNbDeposits();
-}
-
-Account::Account(int initial_deposit) : _accountIndex(_nbAccounts++), _amount(initial_deposit), _nbDeposits(0), _nbWithdrawals(0) {
-
-    _totalAmount += initial_deposit;
-
+	// Print status + "closed"
+	_displayTimestamp();
+	std::cout << "index:" << _accountIndex << ";";
+	std::cout << "amount:" << _amount << ";";
+	std::cout << "closed" << std::endl;
 }
 
 void Account::makeDeposit(int deposit) {
 
     if (deposit > 0) {
 
+		_displayTimestamp();
+		std::cout << "index:" << _accountIndex << ";";
+		std::cout << "p_amount:" << _amount << ";";
+		std::cout << "deposit:" << deposit << ";";
+
         _amount += deposit;
-
         _nbDeposits++;
-
         _totalAmount += deposit;
-
         _totalNbDeposits++;
 
-    }
+		std::cout << "amount:" << _amount << ";";
+		std::cout << "nb_deposits:" << _nbDeposits << std::endl;
 
+    }
 }
 
 bool Account::makeWithdrawal(int withdrawal) {
+
+	_displayTimestamp();
+	std::cout << "index:" << _accountIndex << ";";
+	std::cout << "p_amount:" << _amount << ";";
+	std::cout << "withdrawal:";
 
     if (withdrawal > 0 && _amount >= withdrawal) {
 
@@ -86,17 +76,28 @@ bool Account::makeWithdrawal(int withdrawal) {
         _totalAmount -= withdrawal;
         _totalNbWithdrawals++;
 
+		std::cout << withdrawal << ";";
+		std::cout << "amount:" << _amount << ";";
+		std::cout << "nb_withdrawals:" << _nbWithdrawals << std::endl;
+
         return true;
     }
+
+	std::cout << "refused" << std::endl;
 
     return false;
 	
 }
 
-int Account::checkAmount(void) const {
+void	Account::displayStatus( void ) const {
 
-    return _amount;
-
+	_displayTimestamp();
+	std::cout << "index:" << _accountIndex << ";";
+	std::cout << "amount:" << _amount << ";";
+	std::cout << "deposits:" << _nbDeposits << ";";
+	std::cout << "withdrawals:" << _nbWithdrawals;
+	std::cout << std::endl;
+	
 }
 
 void Account::_displayTimestamp( void ) {
@@ -118,12 +119,27 @@ void Account::displayAccountsInfos() {
 	_displayTimestamp();
 	std::cout << "accounts:" << _nbAccounts << ";";
 	std::cout << "total:" << _totalAmount << ";";
-	std::cout << "deposits:" << _totalAmount << ";";
-	std::cout << "withdrawals:" << _totalAmount << std::endl;
+	std::cout << "deposits:" << _totalNbDeposits << ";";
+	std::cout << "withdrawals:" << _totalNbWithdrawals << std::endl;
 
 }
 
-void	displayStatus( void ) {
-	_displayTimestamp();
-	std::cout << "index:" << _accountIndex << ";";
+int Account::getNbAccounts( void ) {
+	return _nbAccounts;
+}
+
+int Account::getTotalAmount( void ) {
+	return _totalAmount;
+}
+
+int Account::getNbWithdrawals( void ) {
+	return _totalNbWithdrawals;
+}
+
+int Account::getNbDeposits( void ) {
+	return _totalNbDeposits;
+}
+
+int Account::checkAmount(void) const {
+    return _amount;
 }
