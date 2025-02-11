@@ -42,4 +42,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re make_libft make_printf
+.PHONY: all clean fclean re
