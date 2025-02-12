@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:00:06 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/10 11:58:59 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/12 09:54:10 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,16 @@ int PhoneBook::getIndex( void ) {
 	int index;
 
     std::cout << "36 15 Minitel> enter an index: ";
-    std::getline(std::cin, input);
+	
+	while (true) {
+		std::getline(std::cin, input);
+		if (std::cin.eof()) {
+			exit (1);
+		}
+		if (!input.empty()) {
+			break;
+		}
+	}
 
 	if (input.compare("EXIT") == 0 || input.compare("exit") == 0)
 	{

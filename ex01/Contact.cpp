@@ -6,12 +6,13 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:02:00 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/10 11:02:07 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/12 09:57:05 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
 #include <iostream>
+#include <stdlib.h>
 
 std::string Contact::getFirstName() const {
     return _firstName;
@@ -60,6 +61,9 @@ Contact Contact::createContact( void ) {
 	do {
 		std::cout << "36 15 Minitel> Enter first name: ";
 		std::getline(std::cin, _firstName);
+		if (std::cin.eof()) {
+			exit (1);
+		}
 		if (_firstName.empty()) {
 			std::cout << "First name cannot be empty. Please try again." << std::endl;
 		}
@@ -69,6 +73,9 @@ Contact Contact::createContact( void ) {
 	do {
 		std::cout << "36 15 Minitel> Enter last name: ";
 		std::getline(std::cin, _lastName);
+		if (std::cin.eof()) {
+			exit (1);
+		}
 		if (_lastName.empty()) {
 			std::cout << "Last name cannot be empty. Please try again." << std::endl;
 		}
@@ -78,6 +85,9 @@ Contact Contact::createContact( void ) {
 	do {
 		std::cout << "36 15 Minitel> Enter nickname: ";
 		std::getline(std::cin, _nickname);
+		if (std::cin.eof()) {
+			exit (1);
+		}
 		if (_nickname.empty()) {
 			std::cout << "Nickname cannot be empty. Please try again." << std::endl;
 		}
@@ -87,6 +97,9 @@ Contact Contact::createContact( void ) {
 	do {
 		std::cout << "36 15 Minitel> Enter phone number: ";
 		std::getline(std::cin, _phoneNumber);
+		if (std::cin.eof()) {
+			exit (1);
+		}
 		if (_phoneNumber.empty() || _phoneNumber.find_first_not_of("0123456789") != std::string::npos) {
 			std::cout << "Phone number cannot be empty and must contain digits only. Please try again." << std::endl;
 		}
@@ -96,6 +109,9 @@ Contact Contact::createContact( void ) {
 	do {
 		std::cout << "36 15 Minitel> Enter darkest secret: ";
 		std::getline(std::cin, _darkestSecret);
+		if (std::cin.eof()) {
+			exit (1);
+		}
 		if (_darkestSecret.empty()) {
 			std::cout << "Darkest secret cannot be empty. Please try again." << std::endl;
 		}

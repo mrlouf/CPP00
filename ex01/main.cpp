@@ -6,12 +6,13 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:02:39 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/10 10:17:57 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/12 09:53:22 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
+#include <stdlib.h>
 #include "Contact.hpp"
 #include "PhoneBook.hpp"
 
@@ -41,7 +42,16 @@ std::string getUserInput( void ) {
 	std::string input;
 
     std::cout << "36 15 Minitel> ";
-    std::getline(std::cin, input);
+	
+	while (true) {
+		std::getline(std::cin, input);
+		if (std::cin.eof()) {
+			exit (1);
+		}
+		if (!input.empty()) {
+			break;
+		}
+	}
 
     for (size_t i = 0; i < input.length(); ++i) {
         input[i] = std::toupper(input[i]);
@@ -59,7 +69,7 @@ int main( void ) {
 	book.setIndex(0);
 
 	std::string input = getUserInput();
-	
+
 	while (!input.empty()) {
 		if (input.compare("ADD") == 0 || input.compare("add") == 0)
 			book.addContact(book);
