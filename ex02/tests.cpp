@@ -12,6 +12,7 @@
 #include <functional>
 #include "Account.hpp"
 
+// diff <(sed -E 's/\[[0-9]{8}_[0-9]{6}\]//g' log1) <(sed -E 's/\[[0-9]{8}_[0-9]{6}\]//g' log2)
 
 int		main( void ) {
 
