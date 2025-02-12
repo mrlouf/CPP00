@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:00:06 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/12 09:54:10 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:45:48 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int PhoneBook::getIndex( void ) {
 	while (true) {
 		std::getline(std::cin, input);
 		if (std::cin.eof()) {
-			exit (1);
+			return (-1);
 		}
 		if (!input.empty()) {
 			break;
@@ -86,16 +86,18 @@ void printColumn(const std::string& str) {
 
 void PhoneBook::displayContact( PhoneBook& book, int index ) {
 
-	index--;
-	Contact contact = book.getContact(book, index);
+	Contact contact = book.getContact(book, index - 1);
 
-	std::cout << std::endl;
-	std::cout << "First Name: " << contact.getFirstName() << std::endl;
-	std::cout << "Last Name:  " << contact.getLastName() << std::endl;
-	std::cout << "Nickname:   " << contact.getNickname() << std::endl;
-	std::cout << "Phone:      " << contact.getPhoneNumber() << std::endl;
-	std::cout << "Secret:     " << contact.getDarkestSecret() << std::endl;
-	std::cout << std::endl;
+	if (index <= book._index) {
+		index--;
+		std::cout << std::endl;
+		std::cout << "First Name: " << contact.getFirstName() << std::endl;
+		std::cout << "Last Name:  " << contact.getLastName() << std::endl;
+		std::cout << "Nickname:   " << contact.getNickname() << std::endl;
+		std::cout << "Phone:      " << contact.getPhoneNumber() << std::endl;
+		std::cout << "Secret:     " << contact.getDarkestSecret() << std::endl;
+		std::cout << std::endl;
+	}
 }
 
 void PhoneBook::displayAll( PhoneBook book ) {
@@ -112,7 +114,11 @@ void PhoneBook::displayAll( PhoneBook book ) {
 		return ;
 	}
 
-	for (int i = 0; i < book._index; i++) {
+	int	limit = book._index;
+	if (book._index > 8)
+		limit = 8;
+
+	for (int i = 0; i < limit; i++) {
 		
         Contact contact = book._contacts[i];
         std::cout << "|" << std::setw(10) << std::right << i + 1;
@@ -123,7 +129,9 @@ void PhoneBook::displayAll( PhoneBook book ) {
         std::cout << "|";
         printColumn(contact.getNickname());
         std::cout << "|" << std::endl;
+
     }
+	
 	std::cout << std::endl;
 
 	int index = getIndex();
@@ -139,11 +147,11 @@ void PhoneBook::addContact(PhoneBook& book) {
 	contact.createContact();
 
 	if (book._index >= 8) {
-		std::cerr << "36 15 Minitel> PhoneBook was full, last contact overwritten" << std::endl;
-		book._contacts[7] = contact;
-	} else {
-		std::cout << "36 15 Minitel> New contact added!" << std::endl;
-		book._contacts[book._index] = contact;
-		book._index++;
+		std::cerr << "36 15 Minitel> PhoneBook was full, oldest contact overwritten" << std::endl;
+		book._contacts[_index % 8].~Contact();
 	}
+	else
+		std::cout << "36 15 Minitel> New contact added!" << std::endl;
+	book._contacts[_index % 8] = contact;
+	book._index++;
 }

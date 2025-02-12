@@ -6,13 +6,13 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:02:39 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/12 09:53:22 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:25:59 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
-#include <stdlib.h>
+#include <cstdlib>
 #include "Contact.hpp"
 #include "PhoneBook.hpp"
 
@@ -46,7 +46,7 @@ std::string getUserInput( void ) {
 	while (true) {
 		std::getline(std::cin, input);
 		if (std::cin.eof()) {
-			exit (1);
+			return ("EXIT");
 		}
 		if (!input.empty()) {
 			break;

@@ -6,13 +6,17 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:02:00 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/12 09:57:05 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:48:15 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
 #include <iostream>
 #include <stdlib.h>
+
+Contact::Contact() {}
+
+Contact::~Contact() {}
 
 std::string Contact::getFirstName() const {
     return _firstName;
